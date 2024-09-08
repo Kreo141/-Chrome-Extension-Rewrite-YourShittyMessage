@@ -6,9 +6,10 @@ module.exports = {
     background: './background.js',
   },
   output: {
-    filename: 'background.bundle.js', // Name of the output file
+    filename: 'background.js', // Name of the output file
     path: path.resolve(__dirname, 'dist'), // Output directory
   },
+  devtool: 'source-map',
   module: {
     rules: [
       {

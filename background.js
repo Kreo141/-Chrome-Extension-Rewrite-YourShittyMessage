@@ -1,6 +1,5 @@
 import Groq from 'groq-sdk';
 
-// Event listener for when the extension is installed
 chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "rewrite-professional",
@@ -11,7 +10,7 @@ chrome.runtime.onInstalled.addListener(() => {
   chrome.contextMenus.create({
     id: "rewrite-casual",
     title: "Rewrite: Casual",
-    contexts: ["selection"]
+    contexts: ["selection"] 
   });
 
   chrome.contextMenus.create({
@@ -27,7 +26,6 @@ chrome.runtime.onInstalled.addListener(() => {
   });
 });
 
-// Listener for context menu clicks
 chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   console.log(`Menu item clicked: ${info.menuItemId}\nSelected text: ${info.selectionText}`);
   const selectedText = info.selectionText;
@@ -54,22 +52,22 @@ chrome.contextMenus.onClicked.addListener(async (info, tab) => {
   try {
     const rewrittenText = await rewrite(selectedText, mode);
     console.log(`Rewritten text: ${rewrittenText}`);
-    // Optionally send rewritten text back to the page or display it
+
+    chrome.tabs.sendMessage(tab.id, { rewrittenText: rewrittenText });
   } catch (error) {
     console.error("Error rewriting text:", error);
   }
 });
 
-// Async function to rewrite text
 async function rewrite(text, mode) {
-  const groq = new Groq({ apiKey: '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' }); // Replace with your Groq API key
+  const groq = new Groq({ apiKey: '' }); // Replace Groq API key
 
   try {
     const response = await groq.chat.completions.create({
       messages: [
         {
           role: "user",
-          content: `Rephrase this text in ${mode}: ${text}`,
+          content: `Rewrite the following text in ${mode}: ${text}. Provide only the rewritten text without any additional information.`,
         },
       ],
       model: "llama3-8b-8192",

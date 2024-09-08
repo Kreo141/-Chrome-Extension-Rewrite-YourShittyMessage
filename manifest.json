@@ -1,12 +1,23 @@
 {
   "manifest_version": 3,
-  "name": "Context Menu Example",
+  "name": "AI Rewrite Tool",
   "version": "1.0",
+  "description": "Rewrite selected text using AI.",
   "permissions": [
     "contextMenus",
+    "scripting",
     "activeTab"
   ],
   "background": {
-    "service_worker": "dist/background.bundle.js" 
-  }
+    "service_worker": "dist/background.js"
+  },
+  "action": {
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["contentScript.js"]
+    }
+  ]
 }
