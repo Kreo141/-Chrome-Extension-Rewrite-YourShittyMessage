@@ -1,13 +1,13 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development', //  based on your needs
+  mode: 'development', 
   entry: {
     background: './background.js',
   },
   output: {
     filename: 'background.js', // Name of the output file
-    path: path.resolve(__dirname, 'dist'), // Output directory
+    path: path.resolve(__dirname, 'dist'), // Output directory or "dist" folder <: 
   },
   devtool: 'source-map',
   module: {
