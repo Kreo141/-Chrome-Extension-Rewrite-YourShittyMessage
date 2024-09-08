@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  mode: 'development', // or 'production' based on your needs
+  mode: 'development', //  based on your needs
   entry: {
     background: './background.js',
   },
